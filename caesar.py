@@ -3,6 +3,32 @@ english_alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", 'i', "j", "k", "l", 
                     "t", "u", "v", "w", "x", "y", "z"]
 
 
+def encrypt_file_from(path_to_file, given_file_key):
+    file_contents = []
+    with open(path_to_file, "r") as in_file:
+        file_contents = in_file.readlines()
+    with open(path_to_file+".enc", "w") as out_file:
+
+        for line in file_contents:
+            enc_line = encrypt_message_from(line, given_file_key)
+            out_file.write(enc_line+"\n")
+
+    print("Completed. Wrote: " + path_to_file+".enc")
+
+
+def decrypt_file_from(path_to_file, given_file_key):
+    file_contents = []
+    with open(path_to_file, "r") as in_file:
+        file_contents = in_file.readlines()
+    with open(path_to_file+".de_enc", "w") as out_file:
+
+        for line in file_contents:
+            unenc_line = decrypt_message_from(line, given_file_key)
+            out_file.write(unenc_line+"\n")
+
+    print("Completed. Wrote: " + path_to_file+".de_enc")
+
+
 def encrypt_message_from(given_message, given_key):
     if given_key > len(english_alphabet):
         raise Exception("Cannot accept key greater than 26! (Sorry I'm new to this.)")
