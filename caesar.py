@@ -1,10 +1,12 @@
+
 english_alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", 'i', "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
                     "t", "u", "v", "w", "x", "y", "z"]
-message = "This is a message to be encrypted."
-key = 3
 
 
 def encrypt_message_from(given_message, given_key):
+    if given_key > len(english_alphabet):
+        raise Exception("Cannot accept key greater than " + str(len(english_alphabet)) + "! (Sorry I'm new to this.)")
+
     encrypted_given_message = ""
     for letters in given_message:
         try:
@@ -13,10 +15,14 @@ def encrypt_message_from(given_message, given_key):
                 new_offset = offset-len(english_alphabet)
                 if letters.isupper():
                     encrypted_given_message += english_alphabet[new_offset].upper()
-                else:
+                if not letters.isupper():
                     encrypted_given_message += english_alphabet[new_offset]
             else:
-                encrypted_given_message += english_alphabet[offset]
+                if letters.isupper():
+                    encrypted_given_message += english_alphabet[offset].upper()
+                if not letters.isupper():
+                    encrypted_given_message += english_alphabet[offset]
+
         except ValueError:
             encrypted_given_message += letters
 
@@ -24,22 +30,19 @@ def encrypt_message_from(given_message, given_key):
 
 
 def decrypt_message_from(given_message, given_key):
-    clear_text = ""
+    return_clear_text = ""
     for letters in given_message:
         try:
             reverse_offset = english_alphabet.index(letters.lower())-given_key
             if letters.isupper():
-                clear_text += english_alphabet[reverse_offset].upper()
+                return_clear_text += english_alphabet[reverse_offset].upper()
             else:
-                clear_text += english_alphabet[reverse_offset]
+                return_clear_text += english_alphabet[reverse_offset]
         except ValueError:
-            clear_text += letters
+            return_clear_text += letters
 
-    return clear_text
+    return return_clear_text
 
 
-cipher_text = encrypt_message_from(message, key)
-clear_text = decrypt_message_from(cipher_text, key)
 
-print(cipher_text)
-print(clear_text)
+
