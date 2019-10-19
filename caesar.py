@@ -5,7 +5,7 @@ english_alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", 'i', "j", "k", "l", 
 
 def encrypt_message_from(given_message, given_key):
     if given_key > len(english_alphabet):
-        raise Exception("Cannot accept key greater than " + str(len(english_alphabet)) + "! (Sorry I'm new to this.)")
+        raise Exception("Cannot accept key greater than 26! (Sorry I'm new to this.)")
 
     encrypted_given_message = ""
     for letters in given_message:
