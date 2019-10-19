@@ -11,7 +11,10 @@ def encrypt_file_from(path_to_file, given_file_key):
 
         for line in file_contents:
             enc_line = encrypt_message_from(line, given_file_key)
-            out_file.write(enc_line+"\n")
+            if "\n" not in enc_line:
+                out_file.write(enc_line+"\n")
+            else:
+                out_file.write(enc_line)
 
     print("Completed. Wrote: " + path_to_file+".enc")
 
@@ -24,7 +27,10 @@ def decrypt_file_from(path_to_file, given_file_key):
 
         for line in file_contents:
             unenc_line = decrypt_message_from(line, given_file_key)
-            out_file.write(unenc_line+"\n")
+            if "\n" not in unenc_line:
+                out_file.write(unenc_line+"\n")
+            else:
+                out_file.write(unenc_line)
 
     print("Completed. Wrote: " + path_to_file+".de_enc")
 
