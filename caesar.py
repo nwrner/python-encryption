@@ -4,7 +4,6 @@ english_alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", 'i', "j", "k", "l", 
 
 
 def encrypt_file_from(path_to_file, given_file_key):
-    file_contents = []
     with open(path_to_file, "r") as in_file:
         file_contents = in_file.readlines()
     with open(path_to_file+".enc", "w") as out_file:
@@ -20,7 +19,6 @@ def encrypt_file_from(path_to_file, given_file_key):
 
 
 def decrypt_file_from(path_to_file, given_file_key):
-    file_contents = []
     with open(path_to_file, "r") as in_file:
         file_contents = in_file.readlines()
     with open(path_to_file+".de_enc", "w") as out_file:
@@ -74,7 +72,3 @@ def decrypt_message_from(given_message, given_key):
             return_clear_text += letters
 
     return return_clear_text
-
-
-
-
